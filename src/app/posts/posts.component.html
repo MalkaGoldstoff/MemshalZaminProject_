@@ -1,0 +1,19 @@
+<br>
+<div style="width: 25%; left: 30%;">
+<p-table [value]="posts"selectionMode="single" [(selection)]="selectedpost"  (onRowSelect)="onRowSelect($event)">
+    <ng-template pTemplate="header">
+        <tr>
+            <th>כותרת</th>
+            <th>גוף הפוסט</th>
+            <th>קוד הפוסט</th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-post>
+        <tr [pSelectableRow]="post">
+            <td>{{post.title | uppercase}}</td>
+            <td>{{post.body}}</td>
+            <td>{{post.userId}}</td>
+        </tr>
+    </ng-template>
+</p-table>
+</div>

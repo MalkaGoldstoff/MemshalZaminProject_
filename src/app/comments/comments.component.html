@@ -1,0 +1,23 @@
+
+<br>
+<div style="width: 25%;">
+
+<p-table [value]="comments" >
+    <ng-template pTemplate="header">
+        <tr>
+            <th>שם הכותב</th>
+            <th>תוכן התגובה</th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-comment>
+        <tr>
+
+            <td>
+                <a href="mailto:'comment.email'?Subject=Hello&body=links:  %0D 
+                http://link1.com  %0D http://link1.com " target="_top">{{comment.email}}</a>
+            </td>
+            <td>{{comment.body}}</td>
+        </tr>
+    </ng-template>
+</p-table>
+</div>

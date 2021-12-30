@@ -14,7 +14,7 @@ export class PostsComponent implements OnInit {
   @Input()
   id:number=1;
   posts: Post[] = [{ userId: 0, id: 0, title: "", body: "" }]
-  constructor(private route: ActivatedRoute, private _router:Router,private _service: PostsService, _userService:UsersService) { 
+  constructor(private _changeDetector: ChangeDetectorRef, private route: ActivatedRoute, private _router:Router,private _service: PostsService, _userService:UsersService) { 
     _userService.id$.subscribe(data=>{
       // data => console.log(res)
       this.id =data;
@@ -23,7 +23,16 @@ export class PostsComponent implements OnInit {
     )
     // const source = interval(30000).pipe(
     //   takeWhile((): void => { 
-        this._service.getPostsByUser(this.id).subscribe(data => {
+       
+    //  }) 
+    // );
+  }
+ 
+  change(): void {
+    setTimeOut(()=>{
+     this._service.getPostsByUser(this.id).subscribe(data => {
+       this.status =true;
+       this._changeDetector.detectChanges();
           for (let index = 0; index < data.length; index++) {
     
             this.posts[index] = { userId: 0, id: 0, title: "", body: "" };
@@ -34,11 +43,8 @@ export class PostsComponent implements OnInit {
     
           }
         })
-    //  }) 
-    // );
+    }, 30000);
   }
- 
-  
   userId:number=0;
   selectedpost:Post={ userId: 0, id: 0, title: "", body: "" };
   ngOnInit() {
